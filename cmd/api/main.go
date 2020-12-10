@@ -15,6 +15,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 
+	"test-document/migrations"
 	"test-document/pkg/config"
 	"test-document/pkg/docs"
 	"test-document/pkg/storage"
@@ -27,6 +28,8 @@ func main() {
 	if err != nil {
 		os.Exit(1)
 	}
+
+	db.MustExec(migrations.Schema)
 
 	docsRepo := storage.NewRepository(db)
 	docsSvc := docs.NewService(docsRepo)
