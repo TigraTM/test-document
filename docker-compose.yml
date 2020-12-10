@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgresql"
+      POSTGRES_DB:  "postgresql"
+      POSTGRES_PASSWORD: "postgresql"
+
+  test-document:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: test-document
+    container_name: test-document
+    restart: always
+    ports:
+      - "8000:8000"

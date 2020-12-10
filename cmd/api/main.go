@@ -26,7 +26,7 @@ func main() {
 
 	db, err := sqlx.Connect("postgres", cfg.GetString("DB"))
 	if err != nil {
-		os.Exit(1)
+		log.Fatal(fmt.Errorf("db: %w", err))
 	}
 
 	db.MustExec(migrations.Schema)
@@ -40,7 +40,7 @@ func main() {
 	go func() {
 		fmt.Println("server is running")
 		if err := srv.ListenAndServe(); err != nil {
-			fmt.Errorf("error listen and server: %w", err)
+			log.Fatal(fmt.Errorf("error listen and server: %w", err))
 		}
 	}()
 
