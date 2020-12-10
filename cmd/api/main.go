@@ -52,10 +52,8 @@ func main() {
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		fmt.Errorf("error server shutdown: %w", err)
+		log.Fatal(fmt.Errorf("error server shutdown: %w", err))
 	}
-
-	os.Exit(0)
 }
 
 func initRouter(docsSvc docs.Service) *mux.Router {
